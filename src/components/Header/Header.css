@@ -6,3 +6,13 @@
 .MenuNavBar li{
     color: whitesmoke;
 }
+
+.menuBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+
