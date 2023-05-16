@@ -39,6 +39,7 @@ import React from "react";
 
 //*Components
 import Header from "./components/Header/Header";
+import ItemListContainer from "./components/itemListContainer/itemListContainer"
 import ModalCart from "./components/ModalCart/ModalCart";
 
 class App extends React.Component{
@@ -46,7 +47,10 @@ class App extends React.Component{
     return(
       <div>
         <Header/>
-
+        <ItemListContainer 
+          title="GG GAMESTORE"
+          greet="Bienvenido!! Compra tus juegos favoritos y los nuevos lanzamientos"  
+        />
         <ModalCart />
       </div>
     );
