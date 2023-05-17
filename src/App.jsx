@@ -41,6 +41,7 @@ import React from "react";
 import Header from "./components/Header/Header";
 import ItemListContainer from "./components/itemListContainer/itemListContainer"
 import ModalCart from "./components/ModalCart/ModalCart";
+import Footer from "./components/Footer/Footer";
 
 class App extends React.Component{
   render(){
@@ -52,6 +53,7 @@ class App extends React.Component{
           greet="Bienvenido!! Compra tus juegos favoritos y los nuevos lanzamientos"  
         />
         <ModalCart />
+        <Footer />
       </div>
     );
   }

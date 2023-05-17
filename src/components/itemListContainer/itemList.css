@@ -1,0 +1,8 @@
+.fondoGreeting{
+    background-image: url('./bannerGG.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 0 !important;
+    padding: 5em 0 !important;
+}
