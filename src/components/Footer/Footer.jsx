@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import "./footer.css";
+//import "./footer.css";
 
 const Footer = () => {
     let yy = new Date;

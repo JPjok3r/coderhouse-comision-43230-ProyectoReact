@@ -1,14 +1,33 @@
 
+import axios from "axios";
 import "./itemList.css";
+import { useState, useEffect } from "react";
 
-const itemListContainer = ({title, greet}) => {
+import Cards from "../Cards/Cards";
+
+
+const itemListContainer = () => {
+ const [data, setData] = useState([]); 
+
+ useEffect(() => {
+  //axios recuperar los datos del json
+  axios("www.juegos_db.json").then(res => setData(res.data));
+ }, [])
+
   return (
-    <div className="px-4 px-lg-5 my-5 bg-dark py-5 fondoGreeting">
-        <div className="text-center text-white">
-            <h1 className="display-4 fw-bolder">{title}</h1>
-            <p className="lead fw-normal text-white-50 mb-0">{greet}</p>
+    <section className="py-5" id="contenedorCards">
+      <div className="container px-4 px-lg-5 mt-5">
+        <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="contenedorJuegos">
+            {data.map(juego => {
+              return(
+                <div className="col mb-5" key={juego.id}> 
+                <Cards data={juego} />
+                </div>
+              );
+            })}
         </div>
-    </div>
+      </div>
+    </section>
   )
 }
 
