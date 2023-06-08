@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 //*Views
 import HomePage from "./Views/HomePage/HomePage";
 import DetailPage from "./Views/DetailPage/DetailPage";
+import CategoryPage from "./Views/CategoryPage/CategoryPage";
 
 function App(){
   return(
@@ -19,6 +20,7 @@ function App(){
           <Routes>
             <Route path="/" element={<HomePage />}/>
             <Route path="/item/:id" element={<DetailPage/>}/>
+            <Route path="/category/:id" element={<CategoryPage/>}/>
           </Routes>
         </main>
         <ModalCart />

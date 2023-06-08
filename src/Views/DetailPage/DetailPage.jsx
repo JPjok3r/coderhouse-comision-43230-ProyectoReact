@@ -6,8 +6,8 @@ const DetailPage = () => {
   let { id } = useParams();
   const [data, setData] = useState({});
   useEffect(() => {
-    axios("../../www.juegos_db.json").then((res) => {
-      setData(res.data[id - 1]);
+    axios("../../www.db_app.json").then((res) => {
+      setData(res.data[0].juegos[id - 1]);
     });
   }, [id]);
   return (

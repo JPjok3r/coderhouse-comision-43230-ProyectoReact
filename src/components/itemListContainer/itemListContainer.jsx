@@ -11,7 +11,9 @@ const itemListContainer = () => {
 
  useEffect(() => {
   //axios recuperar los datos del json
-  axios("www.juegos_db.json").then(res => setData(res.data));
+  axios("www.db_app.json").then((res) => {
+    setData(res.data[0].juegos);
+  });
  }, [])
 
   return (

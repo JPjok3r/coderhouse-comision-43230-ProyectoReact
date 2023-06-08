@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./NavBar.css"
 
 const NavBar = () => {
+  const [data, setData] = useState([]); 
+
+  useEffect(() => {
+    //axios recuperar los datos del json
+    axios("www.db_app.json").then((res) => {
+      setData(res.data[0].categories);
+    });
+  }, [])
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-ligth">
       <div className="container px-4 px-lg-5">
@@ -26,13 +36,18 @@ const NavBar = () => {
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle text-white" id="navbarDropdown" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown" id="categorias">
-                        <li><a className="dropdown-item" href="#!" id="li-todos">Todos los juegos</a></li>
+                        <li><Link className="dropdown-item" to="/" id="li-todos">Todos los juegos</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="#!">Acción</a></li>
-                        <li><a className="dropdown-item" href="#!">MMO</a></li>
-                        <li><a className="dropdown-item" href="#!">Aventura</a></li>
-                        <li><a className="dropdown-item" href="#!">RPG</a></li>
-                        <li><a className="dropdown-item" href="#!">Carreras</a></li>
+                        {data.map((category) => {
+                          return (
+                            <li key={category.id}>
+                              <Link className="dropdown-item" to={`/category/${category.id}`}>
+                                {category.name}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                        
                     </ul>
                 </li>
             </ul>
