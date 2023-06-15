@@ -7,11 +7,9 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className="menuBar bg-dark">
-      <a className="navbar-brand imgLogo" href="#!">
-        <Link to="/">
+      <Link className="navbar-brand imgLogo" to="/">
           <img src={img} alt="logo" />
-        </Link>
-      </a>
+      </Link>
       < NavBar />
     </header>
   )
