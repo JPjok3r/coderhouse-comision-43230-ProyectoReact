@@ -13,17 +13,17 @@ const Cards = ({ data }) => {
       ) : (
         ``
       )}
-      <img className="card-img-top" src={data.imgsrc} alt={data.nombre} />
+      <img className="card-img-top" src={data.imgsrc} alt={data.name} />
       <div className="card-body p-4">
         <div className="text-center">
-          <h5 className="fw-bolder">{data.nombre}</h5>
+          <h5 className="fw-bolder">{data.name}</h5>
           {/*verificarRate(juego.rate)*/}
-          {data.descuento !== 0 ? (
+          {data.discount !== 0 ? (
             <span className="text-muted text-decoration-line-through">
-              ${data.precio}
+              ${data.price}
             </span>
           ) : (
-            `$${data.precio}`
+            `$${data.price}`
           )}
         </div>
       </div>
@@ -32,7 +32,7 @@ const Cards = ({ data }) => {
           <Link
             to={`/item/${data.id}`}
             className="btn btn-outline-dark mt-auto"
-            id={`juego${data.id}`}
+            id={data.id}
           >
             Ver detalles
           </Link>

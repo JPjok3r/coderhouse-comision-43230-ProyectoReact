@@ -1,17 +1,31 @@
 import { Link } from "react-router-dom"
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+
+import { db } from "../../firebase/firebaseConfig";
+import { collection, query, getDocs } from "firebase/firestore";
+
 import "./NavBar.css"
 
 const NavBar = () => {
+  const { cartItems, cartCantItems, verificarCantidadItems } = useContext(CartContext);
   const [data, setData] = useState([]); 
 
   useEffect(() => {
-    //axios recuperar los datos del json
-    axios("www.db_app.json").then((res) => {
-      setData(res.data[0].categories);
-    });
-  }, [])
+    const getCategories = async () => {
+      const q = query(collection(db, "categories"));
+      const categoriesSnapshot = await getDocs(q);
+      const categoryData = [];
+      categoriesSnapshot.forEach((doc) => {
+        categoryData.push({...doc.data(), id: doc.id});
+      });
+      setData(categoryData);
+    };
+    getCategories();
+  }, []);
+  useEffect(() => {
+    verificarCantidadItems();
+  }, [cartItems.length]);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-ligth">
       <div className="container px-4 px-lg-5">
@@ -41,7 +55,7 @@ const NavBar = () => {
                         {data.map((category) => {
                           return (
                             <li key={category.id}>
-                              <Link className="dropdown-item" to={`/category/${category.id}`}>
+                              <Link className="dropdown-item" to={`/category/${category.name}`}>
                                 {category.name}
                               </Link>
                             </li>
@@ -54,7 +68,7 @@ const NavBar = () => {
             <button className="btn btn-outline-light btnCart" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i className="bi-cart-fill me-1"></i>
                 Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill" id="cartCantElements">0</span>
+                <span className="badge bg-dark text-white ms-1 rounded-pill" id="cartCantElements">{cartCantItems}</span>
             </button>
           </div> 
       </div>

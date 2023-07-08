@@ -1,7 +1,7 @@
-
-import axios from "axios";
 import "./itemList.css";
 import { useState, useEffect } from "react";
+import { db } from "../../firebase/firebaseConfig";
+import { collection, query, getDocs } from "firebase/firestore";
 
 import Cards from "../Cards/Cards";
 
@@ -10,10 +10,16 @@ const itemListContainer = () => {
  const [data, setData] = useState([]); 
 
  useEffect(() => {
-  //axios recuperar los datos del json
-  axios("www.db_app.json").then((res) => {
-    setData(res.data[0].juegos);
-  });
+  const getGames = async () => {
+    const q = query(collection(db, "games"));
+    const gamesSnapshot = await getDocs(q);
+    const dataGames = [];
+    gamesSnapshot.forEach((doc) => {
+      dataGames.push({...doc.data(), id: doc.id});
+    });
+    setData(dataGames);
+  };
+  getGames();
  }, [])
 
   return (
@@ -23,7 +29,7 @@ const itemListContainer = () => {
             {data.map(juego => {
               return(
                 <div className="col mb-5" key={juego.id}> 
-                <Cards data={juego} />
+                  <Cards data={juego} />
                 </div>
               );
             })}
